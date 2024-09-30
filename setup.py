@@ -14,9 +14,9 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     author='Ilia O.',
-    author_email='iliao@remake.ai',
+    author_email='iliao@kaia.ai',
     maintainer='Ilia O.',
-    maintainer_email='iliao@remake.ai',
+    maintainer_email='iliao@kaia.ai',
     keywords=['ROS'],
     classifiers=[
         'Intended Audience :: Developers',

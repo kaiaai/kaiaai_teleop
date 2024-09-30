@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# Copyright 2023 REMAKE.AI
+# Copyright 2023-2024 KAIA.AI
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 import os
 import select
 import sys
@@ -23,6 +22,8 @@ from rclpy.node import Node
 from rclpy.parameter import Parameter
 from ament_index_python.packages import get_package_share_path
 from geometry_msgs.msg import Twist
+from kaiaai import config
+
 
 if os.name == 'nt':
     import msvcrt
@@ -193,10 +194,11 @@ def main(args=None):
     if (len(sys.argv) == 4 and sys.argv[1] == '--ros-args'):
         yaml_path_name = sys.argv[3]
     else:
+        # Hack around ros2 launch failure
         if (len(sys.argv) == 2 and sys.argv[1].startswith('robot_model:=')):
             description = sys.argv[1][13:]
         else:
-            description = 'makerspet_snoopy'
+            description = config.get_var('robot.model')
 
         yaml_path_name = os.path.join(
             get_package_share_path(description),
